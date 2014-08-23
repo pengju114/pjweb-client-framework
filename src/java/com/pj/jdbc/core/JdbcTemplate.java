@@ -45,7 +45,6 @@ public class JdbcTemplate {
      * @param sql 可带参数的SQL语句
      * @param values 参数值列表
      * @return 影响行数
-     * @throws SQLException 
      */
     public int executeBatch(String sql,List<Object[]> values){
         int c=0;
@@ -68,7 +67,7 @@ public class JdbcTemplate {
      * @param sql
      * @param paramVals 参数值
      * @return
-     * @throws SQLException 
+     
      */
     public int executeUpdate(String sql,Object[] paramVals){
         int c=0;
@@ -90,7 +89,7 @@ public class JdbcTemplate {
      * 执行更新
      * @param sql
      * @return
-     * @throws SQLException 
+     
      */
     public int executeUpdate(String sql){
         int c=0;
@@ -112,7 +111,7 @@ public class JdbcTemplate {
      * @param sql
      * @param paramVals
      * @return
-     * @throws SQLException 
+     
      */
     public ResultList<ResultRow> executeQuery(String sql,Object[] paramVals){
         ResultList<ResultRow> rs=null;
@@ -132,7 +131,7 @@ public class JdbcTemplate {
      * 执行查询
      * @param sql
      * @return
-     * @throws SQLException 
+     
      */
     public ResultList<ResultRow> executeQuery(String sql){
         ResultList<ResultRow> rs=null; 
@@ -156,7 +155,7 @@ public class JdbcTemplate {
      * @param startRow 起始行下标 从1开始
      * @param rowCount 需要的结果行数
      * @return 结果列表
-     * @throws SQLException 
+     
      */
     public ResultList<ResultRow> executeQuery(String sql,Object[] paramVals,int startRow,int rowCount) {
         ResultList<ResultRow> rs=null;
@@ -182,7 +181,7 @@ public class JdbcTemplate {
      * @param rowCount 需要的结果行数
      * @param filter 结果集过滤器,可以在这里对记录行进行包装,返回包装的对象即可
      * @return
-     * @throws SQLException 
+     
      */
     public <T> ResultList<T> executeQuery(String sql,Object[] paramVals,int startRow,int rowCount,QueryFilter<T> filter){
         ResultList<T> rs=null;
@@ -206,7 +205,7 @@ public class JdbcTemplate {
      * @param paramVals
      * @param filter 结果集过滤器,可以在这里对记录行进行包装,返回包装的对象即可
      * @return
-     * @throws SQLException 
+     
      */
     public <T> ResultList<T> executeQuery(String sql,Object[] paramVals,QueryFilter<T> filter){
         ResultList<T> rs=null;
@@ -229,7 +228,7 @@ public class JdbcTemplate {
      * @param sql
      * @param filter 结果集过滤器,可以在这里对记录行进行包装,返回包装的对象即可
      * @return
-     * @throws SQLException 
+     
      */
     public <T> ResultList<T> executeQuery(String sql,QueryFilter<T> filter) {
         ResultList<T> rs=null;
@@ -265,7 +264,7 @@ public class JdbcTemplate {
      * @param table 表名
      * @param row 数据行
      * @return
-     * @throws SQLException 
+     
      */
     public int save(String table,ResultRow row){
         int c=0;
@@ -289,7 +288,7 @@ public class JdbcTemplate {
      * 变量的类型必须和数据库中的类型一一对应
      * @param object
      * @return
-     * @throws SQLException 
+     
      */
     public int save(Object object){
         int c=0;
@@ -315,7 +314,7 @@ public class JdbcTemplate {
      * @param rowCount 结果行数
      * @param clazz 类型
      * @return
-     * @throws SQLException 
+     
      */
     public <T> ResultList<T> executeQuery(String sql,Object[] paramVals,int startRow,int rowCount,Class<T> clazz){
         ResultList<T> rs=null;
@@ -339,7 +338,7 @@ public class JdbcTemplate {
      * @param paramVals 参数值
      * @param clazz 类型
      * @return
-     * @throws SQLException 
+     
      */
     public <T> ResultList<T> executeQuery(String sql,Object[] paramVals,Class<T> clazz) {
         ResultList<T> rs=null;
@@ -362,7 +361,7 @@ public class JdbcTemplate {
      * @param sql sql语句
      * @param clazz 类型
      * @return
-     * @throws SQLException 
+     
      */
     public <T> ResultList<T> executeQuery(String sql,Class<T> clazz){
         ResultList<T> rs=null;

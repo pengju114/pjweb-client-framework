@@ -6,6 +6,9 @@
 package com.pj.client.core;
 
 import com.pj.utilities.ConvertUtility;
+import com.pj.utilities.StringUtility;
+import java.util.HashMap;
+import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -19,6 +22,8 @@ import javax.servlet.http.HttpServletResponse;
 public abstract class ServiceResolver {
     public static final String CONF_CLASS_PATTERN="pattern.service.resolver";
     
+    private static final String SQL_INJECT_PATTERN = "((\\%3D)|(=))|((\\%27)|(\\')|(\\-\\-)|(\\%3B)|(:))";
+    
     private static final int DEFAULT_PAGESIZE = 10;
     
     public HttpServletRequest getRequest(){
@@ -26,6 +31,77 @@ public abstract class ServiceResolver {
     }
     public HttpServletResponse getResponse(){
         return ServiceInvoker.getResponse();
+    }
+    
+    /*******************  快捷方法  ******************/
+    
+    /**
+     * 获取string类型的参数
+     * @param key
+     * @return 参数值，无则返回空字符串
+     */
+    public String getStringParameter(String key){
+        return StringUtility.ensureAsString(getRequest().getParameter(key));
+    }
+    /**
+     * 获取string类型的参数，并且进行了SQL注入攻击和跨站脚本攻击安全过滤
+     * @param key
+     * @return 处理后的参数值，无则返回空字符串
+     */
+    public String getSafeStringParameter(String key){
+        String val = getStringParameter(key);
+        return val.replaceAll(SQL_INJECT_PATTERN, "");
+    }
+    
+    /**
+     * 获取int型参数值
+     * @param key
+     * @return 参数值，无则返回0
+     */
+    public Integer getIntParameter(String key){
+        return ConvertUtility.parseInt(getStringParameter(key));
+    }
+    
+    /**
+     * 获取float型参数值
+     * @param key
+     * @return 参数值，无则返回0.0
+     */
+    public Float getFloatParameter(String key){
+        return ConvertUtility.parseFloat(getStringParameter(key));
+    }
+    
+    /**
+     * 获取long型参数值
+     * @param key
+     * @return 参数值，无则返回0
+     */
+    public Long getLongParameter(String key){
+        return ConvertUtility.parseLong(getStringParameter(key));
+    }
+    
+    /**
+     * 根据传进来的参数对生成一个map，map的内容将是map.put(keyAndValues[0],keyAndValues[1]),
+     * map.put(keyAndValues[2],keyAndValues[3]) ...
+     * @param keyAndValues
+     * @return 包含参数对的map
+     */
+    public Map<String,Object> makeMapByKeyAndValues(Object... keyAndValues){
+        
+        if (keyAndValues != null) {
+            HashMap<String,Object> map = new HashMap<String, Object>(keyAndValues.length/2+1);
+            int keyIndex = 0;
+            int valIndex = 1;
+            
+            while (valIndex < keyAndValues.length) {                
+                map.put(StringUtility.ensureAsString(keyAndValues[keyIndex]), keyAndValues[valIndex]);
+                keyIndex += 2;
+                valIndex += 2;
+            }
+            
+            return map;
+        }
+        return null;
     }
     
     /**

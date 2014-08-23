@@ -91,10 +91,7 @@ public class ImageUtility {
 
         /**
          *
-         * @param stringLength 验证码字符个数
-         * @param fontSize 验证码字体大小
          * @param out 目标输出流
-         * @return 返回生成的验证码字符串
          */
         public void renderImage(OutputStream out) {
             if (chars.size() <= 0) {
