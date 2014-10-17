@@ -22,6 +22,8 @@ public class ContextListener implements ServletContextListener{
         //加载配置到Application Scope
         Config.bindToContext(sce.getServletContext());
         sce.getServletContext().setAttribute("contextPath", sce.getServletContext().getContextPath());
+        
+        SessionFactory.initialize();
     }
 
     @Override

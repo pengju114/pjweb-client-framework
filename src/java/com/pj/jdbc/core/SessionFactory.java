@@ -105,6 +105,12 @@ public class SessionFactory {
         }
     }
     
+    
+    /** 仅仅用来加载此类，以此调用 {@link #loadXMLConfig} 方法 */
+    public static void initialize(){
+        
+    }
+    
     public static void release(){
         for (BoneCP object : POOL_MAP.values()) {
             object.shutdown();

@@ -141,11 +141,11 @@ class SessionImpl implements Session{
         }
         if (startRow<1) {
             r.beforeFirst();
-        }else if(startRow<rslist.getTotalRowsCount()){
+        }else if(startRow < rslist.getTotalRowsCount()){
             r.absolute(startRow);
         }
         
-        while (count<rowCount && r.next()) {
+        while (count < rowCount && r.next()) {
             T row=filter.filterEach(count,rslist, r);
             if (row!=null) {
                 rslist.addRow(row);
@@ -289,7 +289,7 @@ class SessionImpl implements Session{
 
     @Override
     public <T> T querySingle(String sql, Object[] paramVals, Class<T> clazz)  throws SQLException {
-        ResultList<T> rs=executeQuery(sql, paramVals, 1, 1, clazz);
+        ResultList<T> rs=executeQuery(sql, paramVals, -1, 1, clazz);
         if (rs.getSize()>0) {
             return rs.get(0);
         }
@@ -303,7 +303,7 @@ class SessionImpl implements Session{
 
     @Override
     public ResultRow querySingle(String sql, Object[] paramVals)  throws SQLException {
-        ResultList<ResultRow> rs=executeQuery(sql, paramVals, 1, 1);
+        ResultList<ResultRow> rs=executeQuery(sql, paramVals, -1, 1);
         if (rs.getSize()>0) {
             return rs.get(0);
         }

@@ -8,7 +8,6 @@ package com.pj.jdbc.services;
 import com.pj.jdbc.core.JdbcTemplate;
 import com.pj.jdbc.core.Session;
 import com.pj.jdbc.core.SessionFactory;
-import java.util.HashMap;
 
 /**
  *
