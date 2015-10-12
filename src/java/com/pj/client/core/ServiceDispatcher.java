@@ -24,25 +24,29 @@ public class ServiceDispatcher {
         ServiceInvoker.setRequest(request);
         ServiceInvoker.setResponse(response);
         
-        //在这里根据参数module判断要调用哪个 Invoker
+        //在这里根据参数module和数据类型判断要调用哪个 Invoker
         String type=StringUtility.ensureAsString(request.getParameter(ServiceInvoker.KEY_HEADER_DATA_TYPE));
         if (StringUtility.isEmpty(type)) {
             type="JSON";
         }
+        
+        String module = StringUtility.ensureAsString(request.getParameter(ServiceInvoker.KEY_HEADER_MODULE));
         
         String clazz = null;
         
         String invokerPattern = Config.getConfig(ServiceInvoker.CONF_CLASS_PATTERN, null);
         if (StringUtility.isEmpty(invokerPattern)) {
             String pkg=ServiceDispatcher.class.getPackage().getName();
-            clazz=pkg+".invokers."+type+"Invoker";
+            module = module+".";
+            clazz=pkg+".invokers"+module+type+"Invoker";
         }else{
             // 配置文件设置了模式
-            clazz = String.format(invokerPattern, type);
+            clazz = String.format(invokerPattern, module, type);
         }
         
         
         try {
+            clazz = clazz.replaceAll("\\.{2,}", ".");// 去掉多余的点
             Class<ServiceInvoker> invokerClass=(Class<ServiceInvoker>) Class.forName(clazz);
             ServiceInvoker invoker=invokerClass.newInstance();
             invoker.invoke();

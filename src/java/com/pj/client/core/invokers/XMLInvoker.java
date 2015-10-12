@@ -6,6 +6,7 @@
 package com.pj.client.core.invokers;
 
 import com.pj.client.core.ServiceInvoker;
+import com.pj.utilities.StringUtility;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
@@ -20,17 +21,11 @@ import javax.servlet.http.HttpServletRequest;
  */
 public class XMLInvoker extends ServiceInvoker{
 
-    private String resolverClassName;
     
     public XMLInvoker(){
-        resolverClassName="com.pj.client.core.resolvers.Resolver";
-        HttpServletRequest request=getRequest();
-        resolverClassName+=request.getParameter(KEY_HEADER_SERVICE);
+        
     }
-    @Override
-    public String getResolverClassName() {
-        return resolverClassName;
-    }
+    
     
     @Override
     public void invokePrepare() throws Exception{

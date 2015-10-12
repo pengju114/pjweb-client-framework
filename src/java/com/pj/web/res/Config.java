@@ -101,4 +101,8 @@ public class Config {
     public static void bindToContext(ServletContext context){
         context.setAttribute("cfg", CONFIG_MAP);
     }
+    
+    public static boolean debug(){
+        return getConfig(Key.DEBUG,false);
+    }
 }

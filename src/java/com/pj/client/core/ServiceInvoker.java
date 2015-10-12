@@ -43,6 +43,7 @@ public abstract class ServiceInvoker {
     
     public static final String KEY_HEADER_PAGESIZE="pageSize";//每页记录数
     public static final String KEY_HEADER_DATA_TYPE="dataType";//数据类型
+    public static final String KEY_HEADER_MODULE="module";//模块
     public static final String KEY_HEADER_SERVICE="service";//要访问的服务ID
 
     /**
@@ -111,12 +112,13 @@ public abstract class ServiceInvoker {
     public String getResolverClassName(){
         String service = getRequest().getParameter(KEY_HEADER_SERVICE);
         String pattern = Config.getConfig(ServiceResolver.CONF_CLASS_PATTERN, null);
+        String module = StringUtility.ensureAsString(getRequest().getParameter(KEY_HEADER_MODULE));
         
         if (StringUtility.isEmpty(service) || StringUtility.isEmpty(pattern)) {
             return null;
         }
         
-        return String.format(pattern, service);
+        return String.format(pattern, module ,service).replaceAll("\\.{2,}", ".");
     }
     
     /**
