@@ -11,10 +11,10 @@ package com.pj.client.core;
  */
 public class VersionInfo {
     public static String getVersionName() {
-        return "1.4";
+        return "1.5";
     }
     
     public static int getVersionCode() {
-        return 14;
+        return 15;
     }
 }
