@@ -475,4 +475,36 @@ public class JdbcTemplate {
         
         return val;
     }
+    
+    public <T> ResultList<T> list(Class<T> clazz) {
+        ResultList<T> val=null;
+        Session session=getSession();
+        if (session!=null) {
+            try {
+                val=session.list(clazz);
+            } catch (Exception e) {
+                log(e.getMessage(), e);
+            } finally{
+                closeSession(session);
+            }
+        }
+        
+        return val;
+    }
+
+    public <T> ResultList<T> list(Class<T> clazz, int startRow, int rowCount) {
+        ResultList<T> val=null;
+        Session session=getSession();
+        if (session!=null) {
+            try {
+                val=session.list(clazz, startRow, rowCount);
+            } catch (Exception e) {
+                log(e.getMessage(), e);
+            } finally{
+                closeSession(session);
+            }
+        }
+        
+        return val;
+    }
 }

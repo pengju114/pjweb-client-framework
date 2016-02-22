@@ -222,4 +222,24 @@ public interface Session {
      * @throws SQLException 
      */
     public ResultList<ResultRow> list(String table, int startRow, int rowCount) throws SQLException;
+    
+    /**
+     * 根据指定Class用@table注解标注的表格查询数据
+     * @param <T>
+     * @param clazz
+     * @return
+     * @throws SQLException 
+     */
+    public <T> ResultList<T> list(Class<T> clazz) throws SQLException;
+    
+    /**
+     * 根据指定Class用@table注解标注的表格查询数据，列出表格中从startRow行开始的rowCount条数据
+     * @param <T>
+     * @param clazz 指定类
+     * @param startRow 起始行下标,从0开始。第一行就是0，第二行就是1……
+     * @param rowCount
+     * @return
+     * @throws SQLException 
+     */
+    public <T> ResultList<T> list(Class<T> clazz, int startRow, int rowCount) throws SQLException;
 }

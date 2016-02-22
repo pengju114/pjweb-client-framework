@@ -317,4 +317,28 @@ class SessionImpl implements Session{
     public ResultList<ResultRow> list(String table, int startRow, int rowCount) throws SQLException {
         return executeQuery("select * from "+table, null, startRow, rowCount);
     }
+
+    public <T> ResultList<T> list(Class<T> clazz) throws SQLException {
+        if (clazz == null) {
+            throw new SQLException("Illegal argument exception. class should not be null.");
+        }
+        Table annotation = clazz.getAnnotation(Table.class);
+        if (annotation == null || annotation.name() == null) {
+            throw new SQLException("the clazz require a Table Annotation.");
+        }
+        
+        return executeQuery("select * from "+annotation.name(), clazz);
+    }
+
+    public <T> ResultList<T> list(Class<T> clazz, int startRow, int rowCount) throws SQLException {
+        if (clazz == null) {
+            throw new SQLException("Illegal argument exception. class should not be null.");
+        }
+        Table annotation = clazz.getAnnotation(Table.class);
+        if (annotation == null || annotation.name() == null) {
+            throw new SQLException("the clazz require a Table Annotation.");
+        }
+        
+        return executeQuery("select * from "+annotation.name(), null, startRow, rowCount, clazz);
+    }
 }
