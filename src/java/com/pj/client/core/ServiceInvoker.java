@@ -102,6 +102,10 @@ public abstract class ServiceInvoker {
         return DEFAULT_CHARSET;
     }
     
+    protected String getContentType(){
+        return "text/json;charset="+getCharset();// 默认
+    }
+    
     /**
      * 通过这个方法可以获取类{@link ServiceResolver}的实现类全路径
      * 然后就可以通过反射查找类并调用服务
@@ -149,7 +153,7 @@ public abstract class ServiceInvoker {
         try {
             getRequest().setCharacterEncoding(getCharset());
             getResponse().setCharacterEncoding(getCharset());
-            getResponse().setContentType("text/html;charset="+getCharset());
+            getResponse().setContentType(getContentType());
         } catch (Exception e) {
             LOGGER.error(e.getMessage(), e);
         }

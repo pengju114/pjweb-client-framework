@@ -6,12 +6,10 @@
 package com.pj.client.core.invokers;
 
 import com.pj.client.core.ServiceInvoker;
-import com.pj.utilities.StringUtility;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
 import java.util.Map;
-import javax.servlet.http.HttpServletRequest;
 
 /**
  *
@@ -25,13 +23,14 @@ public class XMLInvoker extends ServiceInvoker{
     public XMLInvoker(){
         
     }
-    
-    
+
     @Override
-    public void invokePrepare() throws Exception{
-        super.invokePrepare();
-        getResponse().setContentType("text/xml; charset="+getCharset());
+    protected String getContentType() {
+        return "text/xml; charset="+getCharset();
     }
+    
+    
+    
     
     @Override
     protected void writeResult(PrintWriter writer,Map<String,Object> rMap) throws IOException{
