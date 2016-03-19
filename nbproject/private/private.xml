@@ -3,11 +3,8 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/Users/luzhenwen/Documents/selfProjs/NetBeans/pjweb-client-framework/src/java/com/pj/client/ui/Paging.java</file>
-            <file>file:/Users/luzhenwen/Documents/selfProjs/NetBeans/pjweb-client-framework/src/java/com/pj/client/file/EasyDownload.java</file>
-            <file>file:/Users/luzhenwen/Documents/selfProjs/NetBeans/pjweb-client-framework/src/java/com/pj/utilities/ArrayUtility.java</file>
-            <file>file:/Users/luzhenwen/Documents/selfProjs/NetBeans/pjweb-client-framework/src/java/com/pj/client/file/Parameter.java</file>
-            <file>file:/Users/luzhenwen/Documents/selfProjs/NetBeans/pjweb-client-framework/src/java/com/pj/client/file/EasyUpload.java</file>
+            <file>file:/Users/luzhenwen/Documents/selfProjs/NetBeans/pjweb-client-framework/src/java/com/pj/client/core/invokers/JSONInvoker.java</file>
+            <file>file:/Users/luzhenwen/Documents/selfProjs/NetBeans/pjweb-client-framework/src/java/com/pj/client/core/ServiceInvoker.java</file>
         </group>
     </open-files>
 </project-private>
