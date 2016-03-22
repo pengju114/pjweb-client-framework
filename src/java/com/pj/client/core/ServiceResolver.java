@@ -132,7 +132,7 @@ public abstract class ServiceResolver {
      * @param total 总结果数
      * @param result 服务结果
      */
-    public void caculatePageProperties(long total,ServiceResult result){
+    public void calculatePageProperties(long total,ServiceResult result){
         result.setResultCount(total);
         int pn = getPageNumber();
         result.setPageNumber(pn);
